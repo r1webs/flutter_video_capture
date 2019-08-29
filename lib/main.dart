@@ -6,9 +6,21 @@ import 'dart:io';
 import 'dart:io' as io;
 import 'package:video_player/video_player.dart';
 import 'chewie_list_item.dart';
+import 'package:camera/camera.dart';
 
+List<CameraDescription> cameras;
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  // Fetch the available cameras before initializing the app.
+  try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    logError(e.code, e.description);
+  }
+  runApp(MyApp());
+}
+
+//void main() => runApp(MyApp());
 
 // Initiating App
 class MyApp extends StatelessWidget {
@@ -17,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'TikTok',
         routes: {
-          '/capture': (context) => CameraApp()
+          '/capture': (context) => CameraExampleHome()
         },
         home: GetLocationPage(),
         builder: (BuildContext context, Widget child) {
@@ -26,7 +38,7 @@ class MyApp extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 0.0),
           );
         },
-        theme: ThemeData(primaryColor: Colors.green));
+        theme: ThemeData(primaryColor: Colors.black));
   }
 }
 
@@ -118,8 +130,8 @@ class _GetLocationPageState extends State<GetLocationPage> {
             onTap: (int index) {
               if (index == 1) {
                 //getCameras();
-                main1();
-                //Navigator.pushNamed(context, '/capture');
+                //main1();
+                Navigator.pushNamed(context, '/capture');
               }
             },
             selectedItemColor: Colors.amber[800],

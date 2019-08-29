@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
+import 'main.dart';
+
 class CameraExampleHome extends StatefulWidget {
   @override
   _CameraExampleHomeState createState() {
@@ -90,12 +92,12 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
               ),
               decoration: BoxDecoration(
                 color: Colors.black,
-                border: Border.all(
-                  color: controller != null && controller.value.isRecordingVideo
-                      ? Colors.redAccent
-                      : Colors.grey,
-                  width: 3.0,
-                ),
+//                border: Border.all(
+//                  color: controller != null && controller.value.isRecordingVideo
+//                      ? Colors.redAccent
+//                      : Colors.grey,
+//                  width: 3.0,
+//                ),
               ),
             ),
           ),
@@ -300,7 +302,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       if(filePath != null){
         showInSnackBar('Recording will be stopped in 30 sec');
       }
-      var future = new Future.delayed(
+      Future.delayed(
           const Duration(milliseconds: 300000), setTimeOut);
     });
   }
@@ -448,23 +450,23 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   }
 }
 
-class CameraApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: CameraExampleHome(),
-    );
-  }
-}
+//class CameraApp extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      home: CameraExampleHome(),
+//    );
+//  }
+//}
 
-List<CameraDescription> cameras;
-
-Future<void> main1() async {
-  // Fetch the available cameras before initializing the app.
-  try {
-    cameras = await availableCameras();
-  } on CameraException catch (e) {
-    logError(e.code, e.description);
-  }
-  runApp(CameraApp());
-}
+//List<CameraDescription> cameras;
+//
+//Future<void> main1() async {
+//  // Fetch the available cameras before initializing the app.
+//  try {
+//    cameras = await availableCameras();
+//  } on CameraException catch (e) {
+//    logError(e.code, e.description);
+//  }
+//  runApp(CameraApp());
+//}
